@@ -23,51 +23,73 @@
     
     p = new Player();
     o = new ArrayList<Object>();
-    for(int i=0; i<3; i++){
+    for(int i=0; i < 10; i++){
        o.add(new Object(
          new PVector(random(500)-250,random(500)-250,random(500)-250),
          new PVector(25,25,25),
-         new PVector(random(TWO_PI),random(TWO_PI),random(TWO_PI))
+         new PVector(random(TWO_PI),random(TWO_PI),random(TWO_PI)),
+         false
      )); 
     }
     
      o.add(new Cube(
     new PVector(500,0,0),
     new PVector(100,100,100),
-    new PVector(0,0,0)
+    new PVector(0,0,0),
+    true
     ));
      o.add(new Cube(
     new PVector(-500,0,0),
     new PVector(100,100,100),
-    new PVector(0,0,0)
+    new PVector(0,0,0),
+    true
     ));
      o.add(new Cube(
     new PVector(0,0,500),
-    new PVector(300,300,300),
-    new PVector(0,0,0)
+    new PVector(100,100,100),
+    new PVector(0,0,0),
+    true
     ));
     o.add(new Cube(
     new PVector(0,0,-500),
     new PVector(100,100,100),
-    new PVector(0,0,0)
+    new PVector(0,0,0),
+    true
     ));
     
     
     
     o.add(new Cube(
     new PVector(0,0,0),
-    new PVector(200,2,2),
-    new PVector(0,0,0)
+    new PVector(500,2,2),
+    new PVector(0,0,0),
+    true
     ));
     o.add(new Cube(
     new PVector(0,0,0),
-    new PVector(2,200,2),
-    new PVector(0,0,0)
+    new PVector(2,500,2),
+    new PVector(0,0,0),
+    true
     ));
     o.add(new Cube(
     new PVector(0,0,0),
-    new PVector(2,2,200),
-    new PVector(0,0,0)
+    new PVector(2,2,500),
+    new PVector(0,0,0),
+    true
+    ));
+    
+    o.add(new Blob(
+    new PVector(0,0,0),
+    new PVector(100, 100, 100),
+    new PVector(0,0,0),
+    false
+    ));
+    
+    o.add(new Blob(
+    new PVector(1000,0,0),
+    new PVector(100, 100, 100),
+    new PVector(0,0,0),
+    false
     ));
     
     p.turn(-500,-500);
@@ -75,7 +97,7 @@
   
   
   public void keyPressed(){
-      System.out.println(key);
+      //System.out.println(key);
       p.act();       
    }
   
@@ -99,17 +121,24 @@
   
   void draw(){
     background(255);
-    
    
     translate(width/2.0, height/2.0);
     scale(1,-1,1);
     camera(0, 0, 0, 0, 0, 1000, 0, 1, 0);
-    p.viewChange1();
-    p.draw();
+    p.convertPlayerView();
+    //p.draw();
+    
     for(int i=0; i < o.size(); i++){
-        o.get(i).draw();
+        Object ob = o.get(i);
+        ob.resolveForces(o);
+        ob.move();
+        if(i==1){
+          //println(ob.getForce());
+        }
+        ob.draw();
     }
-    p.viewChange2();
+    
+    p.revertPlayerView();
     scale(1,-1,1);
     translate(-width/2.0, -height/2.0);
   }

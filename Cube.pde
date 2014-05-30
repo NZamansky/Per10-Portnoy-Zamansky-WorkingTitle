@@ -1,8 +1,8 @@
 public class Cube extends Object{
 
   
-   public Cube(PVector pos, PVector siz, PVector rot){
-      super(pos, siz, rot);
+   public Cube(PVector pos, PVector siz, PVector rot, boolean block){
+      super(pos, siz, rot, block);
     }
   
   

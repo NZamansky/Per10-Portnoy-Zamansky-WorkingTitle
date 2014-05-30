@@ -22,7 +22,7 @@ public class Player extends Object{
  */
  
  public Player(){
-  super(new PVector(0.0,0.0,0.0), new PVector(10,10,10), new PVector(0.0,0.0,0.0));
+  super(new PVector(0.0,0.0,0.0), new PVector(10,10,10), new PVector(0.0,0.0,0.0), true);
   va = 0.0;
   ha = 0.0;
   eye = new PVector(0,0,0);
@@ -40,14 +40,14 @@ public class Player extends Object{
    va = v;
  }
  
- public void viewChange1(){
+ public void convertPlayerView(){
     //println(target);
     //rotateX(target.x);
     rotateX(va);
     rotateY(ha);
     translate(eye.x, eye.y, eye.z);
  } 
- public void viewChange2(){
+ public void revertPlayerView(){
     translate(-eye.x, -eye.y, -eye.z);
     rotateY(-ha);
     rotateX(-va);
@@ -72,7 +72,7 @@ public class Player extends Object{
    }else if(ha>2*PI){
      ha = ha-2*PI;
    }
-   println(ha*180/PI);
+   //println(ha*180/PI);
    target.x = sin(ha);
    target.z = -cos(ha);
     
