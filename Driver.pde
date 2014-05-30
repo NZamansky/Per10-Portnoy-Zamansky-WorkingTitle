@@ -23,7 +23,7 @@
     
     p = new Player();
     o = new ArrayList<Object>();
-    for(int i=0; i < 10; i++){
+    for(int i=0; i < 2; i++){
        o.add(new Object(
          new PVector(random(500)-250,random(500)-250,random(500)-250),
          new PVector(25,25,25),
