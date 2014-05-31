@@ -1,0 +1,5 @@
+Complete revamp due to OpenGL issues:
+
+We will be creating a room-based game in which the player navigates rooms and does stuff in those rooms.
+
+The rooms will be stored as a graph, each room containing references to adjacent rooms, as well as objects contained within those rooms.
